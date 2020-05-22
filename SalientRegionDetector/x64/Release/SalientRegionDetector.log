@@ -1,0 +1,58 @@
+﻿生成启动时间为 2019/12/31 星期二 下午 7:01:57。
+     1>项目“D:\basevisual\SalientRegionDetectorAndSegmenter3\SalientRegionDetector\SalientRegionDetector.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"x64\Release\SalientRegionDetector.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"x64\Release\SalientRegionDetector.pch" /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt PictureHandler.cpp Saliency.cpp SalientRegionDetector.cpp SalientRegionDetectorDlg.cpp MeanShiftCode\ms.cpp MeanShiftCode\msImageProcessor.cpp MeanShiftCode\RAList.cpp MeanShiftCode\rlist.cpp
+         PictureHandler.cpp
+     1>PictureHandler.cpp(237): warning C4996: '_splitpath': This function or variable may be unsafe. Consider using _splitpath_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdlib.h(854) : 参见“_splitpath”的声明
+         Saliency.cpp
+         SalientRegionDetector.cpp
+         SalientRegionDetectorDlg.cpp
+     1>SalientRegionDetectorDlg.cpp(253): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+     1>SalientRegionDetectorDlg.cpp(462): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+     1>SalientRegionDetectorDlg.cpp(480): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+         ms.cpp
+     1>MeanShiftCode\ms.cpp(1154): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(112) : 参见“strcpy”的声明
+     1>MeanShiftCode\ms.cpp(1155): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(118) : 参见“strcat”的声明
+     1>MeanShiftCode\ms.cpp(1156): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(118) : 参见“strcat”的声明
+     1>MeanShiftCode\ms.cpp(1157): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(118) : 参见“strcat”的声明
+     1>MeanShiftCode\ms.cpp(1160): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\string.h(118) : 参见“strcat”的声明
+         msImageProcessor.cpp
+     1>MeanShiftCode\msImageProcessor.cpp(865): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>MeanShiftCode\msImageProcessor.cpp(866): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>MeanShiftCode\msImageProcessor.cpp(867): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>MeanShiftCode\msImageProcessor.cpp(914): warning C4244: “=”: 从“double”转换到“BYTE”，可能丢失数据
+     1>MeanShiftCode\msImageProcessor.cpp(915): warning C4244: “=”: 从“double”转换到“BYTE”，可能丢失数据
+     1>MeanShiftCode\msImageProcessor.cpp(916): warning C4244: “=”: 从“double”转换到“BYTE”，可能丢失数据
+         RAList.cpp
+         rlist.cpp
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D NDEBUG /D _UNICODE /D UNICODE /l"0x0409" /Ix64\Release\ /nologo /fo"x64\Release\SalientRegionDetector.res" SalientRegionDetector.rc 
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\basevisual\SalientRegionDetectorAndSegmenter3\x64\Release\SalientRegionDetector.exe" /INCREMENTAL:NO /NOLOGO opencv_calib3d330d.lib opencv_core330d.lib opencv_dnn330d.lib opencv_features2d330d.lib opencv_flann330d.lib opencv_highgui330d.lib opencv_xfeatures2d330d.lib opencv_imgcodecs330d.lib opencv_imgproc330d.lib opencv_ml330d.lib opencv_objdetect330d.lib opencv_photo330d.lib opencv_shape330d.lib opencv_stitching330d.lib opencv_superres330d.lib opencv_video330d.lib opencv_videoio330d.lib opencv_videostab330d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\basevisual\SalientRegionDetectorAndSegmenter3\x64\Release\SalientRegionDetector.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\basevisual\SalientRegionDetectorAndSegmenter3\x64\Release\SalientRegionDetector.lib" /MACHINE:X64 x64\Release\SalientRegionDetector.res
+         x64\Release\PictureHandler.obj
+         x64\Release\Saliency.obj
+         x64\Release\SalientRegionDetector.obj
+         x64\Release\SalientRegionDetectorDlg.obj
+         x64\Release\stdafx.obj
+         x64\Release\ms.obj
+         x64\Release\msImageProcessor.obj
+         x64\Release\RAList.obj
+         x64\Release\rlist.obj
+     1>SalientRegionDetectorDlg.obj : error LNK2001: 无法解析的外部符号 "public: void __cdecl cv::Mat::copyTo(class cv::_OutputArray const &)const " (?copyTo@Mat@cv@@QEBAXAEBV_OutputArray@2@@Z)
+     1>SalientRegionDetectorDlg.obj : error LNK2001: 无法解析的外部符号 "void __cdecl cv::rectangle(class cv::_InputOutputArray const &,class cv::Point_<int>,class cv::Point_<int>,class cv::Scalar_<double> const &,int,int,int)" (?rectangle@cv@@YAXAEBV_InputOutputArray@1@V?$Point_@H@1@1AEBV?$Scalar_@N@1@HHH@Z)
+     1>SalientRegionDetectorDlg.obj : error LNK2001: 无法解析的外部符号 "bool __cdecl cv::imwrite(class cv::String const &,class cv::_InputArray const &,class std::vector<int,class std::allocator<int> > const &)" (?imwrite@cv@@YA_NAEBVString@1@AEBV_InputArray@1@AEBV?$vector@HV?$allocator@H@std@@@std@@@Z)
+     1>SalientRegionDetectorDlg.obj : error LNK2001: 无法解析的外部符号 "void __cdecl cv::imshow(class cv::String const &,class cv::_InputArray const &)" (?imshow@cv@@YAXAEBVString@1@AEBV_InputArray@1@@Z)
+     1>D:\basevisual\SalientRegionDetectorAndSegmenter3\x64\Release\SalientRegionDetector.exe : fatal error LNK1120: 4 个无法解析的外部命令
+     1>已完成生成项目“D:\basevisual\SalientRegionDetectorAndSegmenter3\SalientRegionDetector\SalientRegionDetector.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:05.71

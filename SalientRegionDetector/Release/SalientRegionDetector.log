@@ -1,0 +1,25 @@
+﻿生成启动时间为 2019/12/31 星期二 下午 2:13:34。
+     1>项目“D:\basevisual\SalientRegionDetectorAndSegmenter\SalientRegionDetector\SalientRegionDetector.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Release\SalientRegionDetector.pch" /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt SalientRegionDetectorDlg.cpp
+         SalientRegionDetectorDlg.cpp
+     1>SalientRegionDetectorDlg.cpp(452): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\basevisual\SalientRegionDetectorAndSegmenter\Release\SalientRegionDetector.exe" /INCREMENTAL:NO /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"D:\basevisual\SalientRegionDetectorAndSegmenter\Release\SalientRegionDetector.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\basevisual\SalientRegionDetectorAndSegmenter\Release\SalientRegionDetector.lib" /MACHINE:X86 /SAFESEH Release\SalientRegionDetector.res
+         Release\PictureHandler.obj
+         Release\Saliency.obj
+         Release\SalientRegionDetector.obj
+         Release\SalientRegionDetectorDlg.obj
+         Release\stdafx.obj
+         Release\ms.obj
+         Release\msImageProcessor.obj
+         Release\RAList.obj
+         Release\rlist.obj
+         正在生成代码
+         已完成代码的生成
+         SalientRegionDetector.vcxproj -> D:\basevisual\SalientRegionDetectorAndSegmenter\Release\SalientRegionDetector.exe
+     1>已完成生成项目“D:\basevisual\SalientRegionDetectorAndSegmenter\SalientRegionDetector\SalientRegionDetector.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:26.66
