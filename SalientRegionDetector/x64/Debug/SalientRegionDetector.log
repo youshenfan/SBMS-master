@@ -1,9 +1,27 @@
-﻿生成启动时间为 2020/5/22 8:55:35。
+﻿生成启动时间为 2020/5/23 19:20:18。
      1>项目“C:\Users\FWQ\Documents\GitHub\SBMS-master\SalientRegionDetector\SalientRegionDetector.vcxproj”在节点 2 上(Build 个目标)。
-     1>Link:
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /Od /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"x64\Debug\SalientRegionDetector.pch" /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt Saliency.cpp SalientRegionDetectorDlg.cpp
+         Saliency.cpp
+         SalientRegionDetectorDlg.cpp
+     1>SalientRegionDetectorDlg.cpp(255): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+     1>SalientRegionDetectorDlg.cpp(502): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+     1>SalientRegionDetectorDlg.cpp(524): warning C4244: “初始化”: 从“double”转换到“int”，可能丢失数据
+         正在生成代码...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\FWQ\Documents\GitHub\SBMS-master\x64\Debug\SalientRegionDetector.exe" /INCREMENTAL /NOLOGO opencv_calib3d330d.lib opencv_core330d.lib opencv_dnn330d.lib opencv_features2d330d.lib opencv_flann330d.lib opencv_highgui330d.lib opencv_xfeatures2d330d.lib opencv_imgcodecs330d.lib opencv_imgproc330d.lib opencv_ml330d.lib opencv_objdetect330d.lib opencv_photo330d.lib opencv_shape330d.lib opencv_stitching330d.lib opencv_superres330d.lib opencv_video330d.lib opencv_videoio330d.lib opencv_videostab330d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"C:\Users\FWQ\Documents\GitHub\SBMS-master\x64\Debug\SalientRegionDetector.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\FWQ\Documents\GitHub\SBMS-master\x64\Debug\SalientRegionDetector.lib" /MACHINE:X64 x64\Debug\SalientRegionDetector.res
+         x64\Debug\PictureHandler.obj
+         x64\Debug\Saliency.obj
+         x64\Debug\SalientRegionDetector.obj
+         x64\Debug\SalientRegionDetectorDlg.obj
+         x64\Debug\stdafx.obj
+         x64\Debug\ms.obj
+         x64\Debug\msImageProcessor.obj
+         x64\Debug\RAList.obj
+         x64\Debug\rlist.obj
          SalientRegionDetector.vcxproj -> C:\Users\FWQ\Documents\GitHub\SBMS-master\x64\Debug\SalientRegionDetector.exe
      1>已完成生成项目“C:\Users\FWQ\Documents\GitHub\SBMS-master\SalientRegionDetector\SalientRegionDetector.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:00.09
+已用时间 00:00:11.64

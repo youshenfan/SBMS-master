@@ -46,7 +46,7 @@ public:
 										string&				outFilename,
 										string&				saveLocation,
 										int					format,
-										const string&		str = "");// 0 is for BMP and 1 for JPEG
+										const string&		str = "");        // 0 is for BMP and 1 for JPEG
 
 	wstring							Narrow2Wide(
 										const string&		narrowString);

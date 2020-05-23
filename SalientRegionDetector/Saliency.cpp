@@ -64,11 +64,12 @@ void Saliency::RGB2LAB(
 		if(B <= 0.04045)	b = B/12.92;
 		else				b = pow((B+0.055)/1.055,2.4);
 
-		double X = r*0.4124564 + g*0.3575761 + b*0.1804375;
+		double X = r*0.4124564 + g*0.3575761 + b*0.1804375;             // RGB转化到XYZ颜色空间
 		double Y = r*0.2126729 + g*0.7151522 + b*0.0721750;
 		double Z = r*0.0193339 + g*0.1191920 + b*0.9503041;
 		//------------------------
 		// XYZ to LAB conversion
+		// 转化算法参见： https://blog.csdn.net/lz0499/article/details/77345166
 		//------------------------
 		double epsilon = 0.008856;	//actual CIE standard
 		double kappa   = 903.3;		//actual CIE standard
@@ -164,7 +165,7 @@ void Saliency::GaussianSmooth(
 
 //===========================================================================
 ///	GetSaliencyMap
-///
+/// 计算获得显著性图
 /// Outputs a saliency map with a value assigned per pixel. The values are
 /// normalized in the interval [0,255] if normflag is set true (default value).
 //===========================================================================
@@ -200,11 +201,20 @@ void Saliency::GetSaliencyMap(
 	//----------------------------------------------------
 	// The kernel can be [1 2 1] or [1 4 6 4 1] as needed.
 	// The code below show usage of [1 2 1] kernel.
+	// 核是用来进行高斯光滑的
 	//----------------------------------------------------
 	vector<double> kernel(0);
 	kernel.push_back(1.0);
 	kernel.push_back(2.0);
 	kernel.push_back(1.0);
+	
+	// 使用[1 4 6 4 1]核的方法【一般会使显著得表现得更白一些，但差别不大】
+	// kernel.push_back(1.0);
+	// kernel.push_back(4.0);
+	// kernel.push_back(6.0);
+	// kernel.push_back(4.0);
+	// kernel.push_back(1.0);
+
 
 	GaussianSmooth(lvec, width, height, kernel, slvec);
 	GaussianSmooth(avec, width, height, kernel, savec);

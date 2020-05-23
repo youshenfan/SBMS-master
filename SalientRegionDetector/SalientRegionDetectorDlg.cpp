@@ -3,7 +3,7 @@
 //
 //===========================================================================
 // This code implements the saliency detection and segmentation method described in:
-//
+// 该程序完成了如下文献描述的显著性检测和分割方法：
 // R. Achanta, S. Hemami, F. Estrada and S. S. strunk, Frequency-tuned Salient Region Detection,
 // IEEE International Conference on Computer Vision and Pattern Recognition (CVPR), 2009
 //===========================================================================
@@ -131,9 +131,10 @@ HCURSOR CSalientRegionDetectorDlg::OnQueryDragIcon()
 }
 
 //=================================================================================
-///	GetPictures
+///	GetPictures  获取图片
 ///
 ///	This function collects all the pictures the user chooses into a vector.
+/// 该函数将用户选择的所有图片整理到一个vector中
 //=================================================================================
 void CSalientRegionDetectorDlg::GetPictures(vector<string>& picvec)
 {
@@ -193,7 +194,7 @@ bool CSalientRegionDetectorDlg::BrowseForFolder(string& folderpath)
 }
 
 //===========================================================================
-///	DoMeanShiftSegmentation
+///	DoMeanShiftSegmentation   进行均值漂移分割
 //===========================================================================
 void CSalientRegionDetectorDlg::DoMeanShiftSegmentation(
 	const vector<UINT>&						inputImg,
@@ -383,8 +384,10 @@ void CSalientRegionDetectorDlg::ChooseSalientPixelsToShow(
 
 //===========================================================================
 ///	DoMeanShiftSegmentationBasedProcessing
+/// 进行基于均值漂移分割的处理
 ///
 ///	Do the segmentation of salient region based on K-Means segmentation
+/// 进行基于K-means分割的显著性区域分割
 //===========================================================================
 void CSalientRegionDetectorDlg::DoMeanShiftSegmentationBasedProcessing(
 	const vector<UINT>&						inputImg,
@@ -491,12 +494,12 @@ void CSalientRegionDetectorDlg::OnBnClickedButtonDetectSaliency()
 	PictureHandler picHand;
 	vector<string> picvec(0);
 	picvec.resize(0);
-	string saveLocation = "./data/";
+	string saveLocation = "./data/";                             // ★注意：一定得自己提前创建data输出保存文件夹，否则会报错
 	// BrowseForFolder(saveLocation);
-	//_CrtSetBreakAlloc(269); //for locating memory leeking;
-	GetPictures(picvec);//user chooses one or more pictures
+	//_CrtSetBreakAlloc(269);                                    //for locating memory leeking;
+	GetPictures(picvec);                                         // 用户自己选择图像或图像序列
 
-	int numPics( picvec.size() );
+	int numPics( picvec.size() );                                // 图像序列中图像个数
 
 	for( int k = 0; k < numPics; k++ )
 	{
@@ -504,47 +507,48 @@ void CSalientRegionDetectorDlg::OnBnClickedButtonDetectSaliency()
 		int width(0);
 		int height(0);
 
-		picHand.GetPictureBuffer( picvec[k], img, width, height );
-		int sz = width*height;
+		picHand.GetPictureBuffer( picvec[k], img, width, height );   // 复制并获取图像信息
+		int sz = width*height;                                   // size: 总像素点数
 
 		Saliency sal;
-		vector<double> salmap(0);
-		sal.GetSaliencyMap(img, width, height, salmap, true);
+		vector<double> salmap(0);                                // 初始化显著性图
+		sal.GetSaliencyMap(img, width, height, salmap, true);    // 输入原图, 宽度, 高度, 输出显著性图, 进行归一化操作
+		
+		//namedWindow("hello");
+		//imshow("hello", img);
+		// picHand.SavePicture(salmap, width, height, picvec[k], saveLocation, 1, "_1_salmapyuan");// 0 is for BMP and 1 for JPEG)
 
-		vector<UINT> outimg(sz);
+		vector<UINT> outimg(sz);                                // 计算并输出保存显著性图outimg
 		for( int i = 0; i < sz; i++ )
 		{
-			int val = salmap[i] + 0.5;
-			outimg[i] = val << 16 | val << 8 | val;
+			int val = salmap[i] + 0.5;                     // 为了四舍五入
+			outimg[i] = val << 16 | val << 8 | val;        // 或关系：按位左移16位；按位左移8位；原图
 		}
-		picHand.SavePicture(outimg, width, height, picvec[k], saveLocation, 1, "_salmap.jpg");// 0 is for BMP and 1 for JPEG)
+		picHand.SavePicture(outimg, width, height, picvec[k], saveLocation, 1, "_1_salmap");// 0 is for BMP and 1 for JPEG)
 		
-		//if(m_segmentationflag)
+		//if(m_segmentationflag)          // 注释掉此判断，为了不check也能计算均值漂移
 		//{
 			vector<UINT> segimg, segobj;
 			vector<vector<UINT>> imgclustering;
 			DoMeanShiftSegmentationBasedProcessing(img, width, height, picvec[k], salmap, 7, 10, 20, segimg, segobj, imgclustering);
 			cout << imgclustering[0][2] << endl;
-		//	DrawContoursAroundSegments(segimg, width, height, 0xffffff);
+		//	DrawContoursAroundSegments(segimg, width, height, 0xffffff);       //在分割边界画线，以示区别
 			//DrawContoursAroundSegments(segobj, width, height, 0xffffff);
-			picHand.SavePicture(segimg, width, height, picvec[k], saveLocation, 1, "_meanshift.jpg");
-			picHand.SavePicture(segobj, width, height, picvec[k], saveLocation, 1, "_salientobject.jpg");
+			picHand.SavePicture(segimg, width, height, picvec[k], saveLocation, 1, "_2_meanshift");        // 保存均值漂移图
+			picHand.SavePicture(segobj, width, height, picvec[k], saveLocation, 1, "_3_salientobject");    // 保存显著目标图
 		//}
 
 
-		
-		// 加绿框
-		namedWindow("test");
-		Mat dest2 = Mat(height, width, CV_8UC4, img.data());
-	
-	
 
-		for (int flag = 0; flag < (imgclustering.size()-1); flag++)
+		// 给显著性区域加绿框
+		namedWindow("test");
+		Mat dest2 = Mat(height, width, CV_8UC4, img.data());               // 初始化加绿框图
+
+		for (int flag = 0; flag < (imgclustering.size()-1); flag++)      // flag表示逐个聚类计算绿框
 		{
-			//int flag = 50;
-			vector<cv::Point> points;
+			vector<cv::Point> points;          // 初始化点集
 			int i = 0;
-			for (i = 0; i < height*width;)
+			for (i = 0; i < sz;)
 		{   
 			int j = 0;
 			int k = 0;
@@ -552,39 +556,35 @@ void CSalientRegionDetectorDlg::OnBnClickedButtonDetectSaliency()
 			  {
 				for (k = 0; k < width; k++)
 				{
-					cv::Point point;
-					if (imgclustering[flag][i]>0)
+					cv::Point point;           // 定义点
+					if (imgclustering[flag][i]>0)       // imgclustering表示图像聚类结果：[聚类编号][像素点编号]
 					{
 						point.x = k;
 						point.y = j;
 						points.push_back(point);
 					}
-					    i++;
+					i++;
 				 }
 			  }
 			}
 			cv::Rect box = boundingRect(points);
-			//rectangle(dest2, cv::Point(box.x, box.y), cv::Point(box.x + box.width, box.y + box.height), Scalar(0, 255, 0));  // 加绿框
-			rectangle(dest2, box.tl(), box.br(), Scalar(0, 255, 0));  // 加绿框
-			imshow("test", dest2);
-			waitKey(10);
+			if (points.size()>(0.005*sz) && points.size()<(0.5*sz))       // 判断点数占总像素点的多大后才会选择画绿框
+			{   // 代码改进说明：改进了框中的优胜项，小的框和过大的框不再显示
+				rectangle(dest2, box.tl(), box.br(), Scalar(0, 255, 0));
+				imshow("test", dest2);                                   // 逐个画绿框
+				waitKey(1);
+			}
+				
 		}
-		string path,tempStr;
+		string path,tempStr;                                       // 构造保存路径与保存名称
 		tempStr = picvec[k];
-		tempStr.erase(tempStr.end() - 4, tempStr.end());
-		path = tempStr + "_lvkuang.jpg";
+		tempStr.erase(tempStr.end() - 4, tempStr.end());    // 获取文件名
+		path = tempStr+ "_4_lvkuang.jpg";
 		//char* filename;
 		//strcpy(filename, path.c_str());
-		imwrite(path, dest2);
+		imwrite(path, dest2);                                        // 保存带绿框的图
 	
-
-
-		// 下一步：改进框中的优胜项；
-		// 自动保存在文件夹中
-
-
-	//imwrite("D:\\basevisual\\SalientRegionDetectorAndSegmenter3\\data\\11.jpg", dest);
-	
+		
 
 	}
 	AfxMessageBox(L"Done!", 0, 0);
