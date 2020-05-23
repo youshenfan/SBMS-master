@@ -212,10 +212,10 @@ void CSalientRegionDetectorDlg::DoMeanShiftSegmentation(
 	{int i(0);
 	for( int p = 0; p < sz; p++ )
 	{
-		bytebuff[i+0] = inputImg[p] >> 16 & 0xff;
-		bytebuff[i+1] = inputImg[p] >>  8 & 0xff;
-		bytebuff[i+2] = inputImg[p]       & 0xff;
-		i += 3;
+		bytebuff[i+0] = inputImg[p] >> 16 & 0xff;       // 右移2字节截取
+		bytebuff[i+1] = inputImg[p] >>  8 & 0xff;       // 右移1字节截取
+		bytebuff[i+2] = inputImg[p]       & 0xff;       // 直接     截取
+		i += 3;                                         // 3字节3字节移位
 	}}
 	msImageProcessor mss;
 	mss.DefineImage(bytebuff, COLOR, height, width);		
@@ -508,34 +508,31 @@ void CSalientRegionDetectorDlg::OnBnClickedButtonDetectSaliency()
 		int height(0);
 
 		picHand.GetPictureBuffer( picvec[k], img, width, height );   // 复制并获取图像信息
-		int sz = width*height;                                   // size: 总像素点数
+		int sz = width*height;                                       // size: 总像素点数
 
 		Saliency sal;
-		vector<double> salmap(0);                                // 初始化显著性图
-		sal.GetSaliencyMap(img, width, height, salmap, true);    // 输入原图, 宽度, 高度, 输出显著性图, 进行归一化操作
+		vector<double> salmap(0);                                    // 初始化显著性图
+		sal.GetSaliencyMap(img, width, height, salmap, true);        // 输入原图, 宽度, 高度, 输出显著性图, 进行归一化操作
 		
-		//namedWindow("hello");
-		//imshow("hello", img);
-		// picHand.SavePicture(salmap, width, height, picvec[k], saveLocation, 1, "_1_salmapyuan");// 0 is for BMP and 1 for JPEG)
-
-		vector<UINT> outimg(sz);                                // 计算并输出保存显著性图outimg
+		vector<UINT> outimg(sz);                                     // 计算并输出保存显著性图outimg
 		for( int i = 0; i < sz; i++ )
 		{
-			int val = salmap[i] + 0.5;                     // 为了四舍五入
-			outimg[i] = val << 16 | val << 8 | val;        // 或关系：按位左移16位；按位左移8位；原图
+			int val = salmap[i] + 0.5;                                    // 先四舍五入
+			outimg[i] = val << 16 | val << 8 | val;                       // 拼接数据：按位左移16位；按位左移8位；原图
 		}
-		picHand.SavePicture(outimg, width, height, picvec[k], saveLocation, 1, "_1_salmap");// 0 is for BMP and 1 for JPEG)
+		picHand.SavePicture(outimg, width, height, picvec[k], saveLocation, 1, "_1_SalMap");// 0 is for BMP and 1 for JPEG)
 		
 		//if(m_segmentationflag)          // 注释掉此判断，为了不check也能计算均值漂移
 		//{
 			vector<UINT> segimg, segobj;
 			vector<vector<UINT>> imgclustering;
 			DoMeanShiftSegmentationBasedProcessing(img, width, height, picvec[k], salmap, 7, 10, 20, segimg, segobj, imgclustering);
-			cout << imgclustering[0][2] << endl;
+			                                  // 输入图，宽，高，文件名，显著图，sigmaS，sigmaR，minRegion
+			cout << imgclustering[0][2] << endl;            // 显示聚类获得的个数
 		//	DrawContoursAroundSegments(segimg, width, height, 0xffffff);       //在分割边界画线，以示区别
 			//DrawContoursAroundSegments(segobj, width, height, 0xffffff);
-			picHand.SavePicture(segimg, width, height, picvec[k], saveLocation, 1, "_2_meanshift");        // 保存均值漂移图
-			picHand.SavePicture(segobj, width, height, picvec[k], saveLocation, 1, "_3_salientobject");    // 保存显著目标图
+			picHand.SavePicture(segimg, width, height, picvec[k], saveLocation, 1, "_2_MeanShift");        // 保存均值漂移图
+			picHand.SavePicture(segobj, width, height, picvec[k], saveLocation, 1, "_3_SalientObject");    // 保存显著目标图
 		//}
 
 
@@ -579,7 +576,7 @@ void CSalientRegionDetectorDlg::OnBnClickedButtonDetectSaliency()
 		string path,tempStr;                                       // 构造保存路径与保存名称
 		tempStr = picvec[k];
 		tempStr.erase(tempStr.end() - 4, tempStr.end());    // 获取文件名
-		path = tempStr+ "_4_lvkuang.jpg";
+		path = tempStr+ "_4_LvKuang.jpg";
 		//char* filename;
 		//strcpy(filename, path.c_str());
 		imwrite(path, dest2);                                        // 保存带绿框的图

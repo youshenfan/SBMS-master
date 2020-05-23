@@ -182,6 +182,7 @@ void Saliency::GetSaliencyMap(
 
 	vector<double> lvec(0), avec(0), bvec(0);
 	RGB2LAB(inputimg, lvec, avec, bvec);
+
 	//--------------------------
 	// Obtain Lab average values
 	//--------------------------
@@ -192,9 +193,9 @@ void Saliency::GetSaliencyMap(
 		avga += avec[i];
 		avgb += bvec[i];
 	}}
-	avgl /= sz;
-	avga /= sz;
-	avgb /= sz;
+	avgl /= sz;          // 获得L的平均值
+	avga /= sz;          // 获得a的平均值
+	avgb /= sz;          // 获得b的平均值
 
 	vector<double> slvec(0), savec(0), sbvec(0);
 
@@ -216,16 +217,30 @@ void Saliency::GetSaliencyMap(
 	// kernel.push_back(1.0);
 
 
-	GaussianSmooth(lvec, width, height, kernel, slvec);
+	GaussianSmooth(lvec, width, height, kernel, slvec);    // 获得高斯平滑处理后的L信息slvec
 	GaussianSmooth(avec, width, height, kernel, savec);
 	GaussianSmooth(bvec, width, height, kernel, sbvec);
 
-	{for( int i = 0; i < sz; i++ )
+
+	// 源程序的平方和
+	//{for( int i = 0; i < sz; i++ )                       // 统计平方和作为显著度值
+	//{
+	//	salmap[i] = (slvec[i]-avgl)*(slvec[i]-avgl) +
+	//				(savec[i]-avga)*(savec[i]-avga) +
+	//				(sbvec[i]-avgb)*(sbvec[i]-avgb);
+	//}}
+
+
+	// FWQ修改后的显著度值计算程序
+	// 发现规律：确实可以通过调整系数，调节绿地变为不显著值，但经过均值漂移，是大块连起来的地方作为显著性区域显示的。
+	{for (int i = 0; i < sz; i++)                       // 统计平方和作为显著度值
 	{
-		salmap[i] = (slvec[i]-avgl)*(slvec[i]-avgl) +
-					(savec[i]-avga)*(savec[i]-avga) +
-					(sbvec[i]-avgb)*(sbvec[i]-avgb);
+		salmap[i] = (slvec[i] - avgl)*(slvec[i] - avgl) +
+			        (savec[i] - avga)*(savec[i] - avga) +
+			        0.001* (sbvec[i] - avgb)*(sbvec[i] - avgb);
 	}}
+	/// FWQ修改后的显著度值计算程序
+
 
 	if( true == normflag )
 	{
@@ -233,4 +248,18 @@ void Saliency::GetSaliencyMap(
 		Normalize(salmap, width, height, normalized);
 		swap(salmap, normalized);
 	}
+
+
+
+	// 测试绘图Lab空间图
+	// vector<double> testImg;
+	// testImg.resize(sz);
+	// {for (int i = 0; i < sz; i++)                       // 统计平方和作为显著度值
+	// {
+	//	testImg[i] = bvec[i];
+	// }}
+	// salmap = testImg;
+
+
+
 }
