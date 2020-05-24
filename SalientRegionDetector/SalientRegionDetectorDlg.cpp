@@ -529,10 +529,16 @@ void CSalientRegionDetectorDlg::OnBnClickedButtonDetectSaliency()
 			DoMeanShiftSegmentationBasedProcessing(img, width, height, picvec[k], salmap, 7, 10, 20, segimg, segobj, imgclustering);
 			                                  // 输入图，宽，高，文件名，显著图，sigmaS，sigmaR，minRegion
 			cout << imgclustering[0][2] << endl;            // 显示聚类获得的个数
-		//	DrawContoursAroundSegments(segimg, width, height, 0xffffff);       //在分割边界画线，以示区别
-			//DrawContoursAroundSegments(segobj, width, height, 0xffffff);
+			vector<UINT> segimgbordered = segimg;
+			vector<UINT> segobjbordered = segobj;
+			
+			
+			DrawContoursAroundSegments(segimgbordered, width, height, 0xffffff);       //在分割边界画线，以示区别
+			DrawContoursAroundSegments(segobjbordered, width, height, 0xffffff);
 			picHand.SavePicture(segimg, width, height, picvec[k], saveLocation, 1, "_2_MeanShift");        // 保存均值漂移图
 			picHand.SavePicture(segobj, width, height, picvec[k], saveLocation, 1, "_3_SalientObject");    // 保存显著目标图
+			picHand.SavePicture(segimgbordered, width, height, picvec[k], saveLocation, 1, "_2_MeanShiftbordered");        // 保存均值漂移图
+			picHand.SavePicture(segobjbordered, width, height, picvec[k], saveLocation, 1, "_3_SalientObjectbordered");    // 保存显著目标图
 		//}
 
 
